@@ -3,6 +3,7 @@ Achille — Heartbeat
 Lit HEARTBEAT.md et évalue les conditions pour envoyer des messages proactifs.
 """
 from datetime import datetime
+from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from brain.responder import generate_with_model
@@ -20,7 +21,40 @@ tz = ZoneInfo(TIMEZONE)
 
 async def morning_briefing():
     """Briefing matin — agenda + priorités + question du jour."""
-    
+
+    # Read consolidation report
+    consolidation_summary = ""
+    try:
+        from config.settings import CONSOLIDATION_REPORT_PATH
+        report_path = Path(CONSOLIDATION_REPORT_PATH)
+        if report_path.exists():
+            import json as _json
+            with open(report_path) as f:
+                creport = _json.load(f)
+            parts = [f"Consolidation de nuit ({creport.get('started_at', '?')} -> {creport.get('finished_at', '?')}):"]
+            for name, step in creport.get("steps", {}).items():
+                status = step.get("status", "?")
+                if status == "ok":
+                    details = step.get("details", [])
+                    if details:
+                        parts.append(f"- {name}: {', '.join(str(d) for d in details[:3])}")
+                    elif step.get("duplicates_removed"):
+                        parts.append(f"- {name}: {step['duplicates_removed']} doublons supprimes")
+                    elif step.get("journals_archived"):
+                        parts.append(f"- {name}: {step['journals_archived']} journaux archives")
+                elif status == "error":
+                    parts.append(f"- {name}: ERREUR - {step.get('error', '?')}")
+            errors = creport.get("errors", [])
+            if errors:
+                parts.append(f"Erreurs: {', '.join(errors)}")
+            else:
+                parts.append("Pas d'erreur.")
+            consolidation_summary = "\n".join(parts)
+        else:
+            consolidation_summary = "Consolidation de nuit: non executee."
+    except Exception as e:
+        consolidation_summary = f"Consolidation de nuit: erreur lecture rapport ({e})"
+
     sprint = read("work/current-sprint.md")
     beliefs = read("profile/beliefs.md")
     open_q = read("open-questions/what-matters.md")
@@ -34,6 +68,9 @@ Règles :
 - 1-2 priorités de la semaine
 - 1 question liée à un sujet de Couche 2 ou 3 (tire de open-questions ou beliefs)
 - Ton direct et concis
+
+Rapport de consolidation:
+{consolidation_summary}
 
 Contexte :
 Sprint en cours : {sprint}
