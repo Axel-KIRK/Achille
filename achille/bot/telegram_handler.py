@@ -3,6 +3,7 @@ Achille — Telegram Handler
 Gère les messages entrants et orchestre le pipeline.
 """
 import asyncio
+import re
 import sqlite3
 from datetime import datetime
 from pathlib import Path
@@ -19,6 +20,8 @@ from brain.responder import generate
 from brain.dual_prompt import run as dual_prompt_run
 from brain.sycophancy_guard import check as sycophancy_check
 from memory.extractor import extract_and_update
+from memory.consolidation_state import get_last_pending, remove_pending, cleanup_expired
+from memory.writer import auto_commit_targeted, append
 
 # SQLite pour l'historique de conversation
 DB_PATH = Path(BRAIN_REPO_PATH).parent / "achille_history.db"
@@ -83,7 +86,39 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_message = update.message.text
     if not user_message:
         return
-    
+
+    # Check for consolidation confirmation (oui/non)
+    cleanup_expired()
+    pending = get_last_pending()
+    if pending and re.match(r"^(oui|non|yes|no)$", user_message.strip(), re.IGNORECASE):
+        is_yes = user_message.strip().lower() in ("oui", "yes")
+        if is_yes:
+            try:
+                if pending["type"] == "contradiction_resolved":
+                    data = pending["data"]
+                    note = f"\n- **Resolu** ({datetime.now().strftime('%Y-%m-%d')}): {data.get('reason', '')}\n"
+                    append("open-questions/contradictions.md", note)
+                    auto_commit_targeted(
+                        "consolidation: contradiction resolue",
+                        ["open-questions/contradictions.md"]
+                    )
+                elif pending["type"] == "belief_shift":
+                    data = pending["data"]
+                    note = f"\n- Mise a jour ({datetime.now().strftime('%Y-%m-%d')}): '{data.get('belief', '')}' confiance {data.get('old_confidence')}->{data.get('new_confidence')} - {data.get('reason', '')}\n"
+                    belief_dir = Path(BRAIN_REPO_PATH) / "profile"
+                    belief_files = [f.name for f in belief_dir.glob("beliefs*.md")] if belief_dir.exists() else []
+                    if belief_files:
+                        target = f"profile/{belief_files[0]}"
+                        append(target, note)
+                        auto_commit_targeted("consolidation: belief updated", [target])
+            except Exception as e:
+                print(f"[confirmation error] {e}")
+            await update.message.reply_text("Fait.")
+        else:
+            await update.message.reply_text("OK, je laisse.")
+        remove_pending(pending["id"])
+        return
+
     # Indicateur de frappe
     await context.bot.send_chat_action(chat_id=AXEL_CHAT_ID, action="typing")
     
