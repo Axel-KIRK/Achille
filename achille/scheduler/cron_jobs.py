@@ -12,6 +12,7 @@ from config.settings import (
     MORNING_BRIEFING_HOUR, MORNING_BRIEFING_MINUTE,
     EVENING_CHECKIN_HOUR, EVENING_CHECKIN_MINUTE,
 )
+from memory.consolidator import run_daily_consolidation
 from scheduler.heartbeat import (
     morning_briefing,
     evening_checkin,
@@ -74,5 +75,17 @@ def create_scheduler() -> AsyncIOScheduler:
         id="inactivity_check",
         name="Check inactivité",
     )
-    
+
+    # Consolidation memoire — tous les jours a 3h
+    scheduler.add_job(
+        run_daily_consolidation,
+        CronTrigger(
+            hour=3,
+            minute=0,
+            timezone=tz,
+        ),
+        id="daily_consolidation",
+        name="Consolidation memoire",
+    )
+
     return scheduler
