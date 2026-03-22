@@ -3,8 +3,49 @@ Achille — Memory Reader
 Lit les fichiers Markdown depuis le repo brain.
 """
 import os
+import yaml
 from pathlib import Path
 from config.settings import BRAIN_REPO_PATH
+
+
+def _strip_frontmatter(text: str) -> str:
+    """Supprime le bloc YAML frontmatter (délimité par ---) du texte."""
+    if not text.startswith("---"):
+        return text
+    # Find the closing ---
+    end = text.find("\n---", 3)
+    if end == -1:
+        return text
+    # Skip past the closing --- and any following newlines
+    after = end + 4  # len("\n---") == 4
+    while after < len(text) and text[after] == "\n":
+        after += 1
+    return text[after:]
+
+
+def read_header(filepath: str = "", text: str = "") -> dict:
+    """Parse le YAML frontmatter d'un fichier ou d'un texte brut.
+
+    Fournir soit `filepath` (chemin relatif dans le brain repo) soit `text`.
+    Retourne un dict vide si aucun frontmatter n'est trouvé.
+    """
+    if filepath:
+        full_path = Path(BRAIN_REPO_PATH) / filepath
+        if not full_path.exists():
+            return {}
+        text = full_path.read_text(encoding="utf-8")
+
+    if not text.startswith("---"):
+        return {}
+    end = text.find("\n---", 3)
+    if end == -1:
+        return {}
+    yaml_block = text[3:end].strip()
+    try:
+        parsed = yaml.safe_load(yaml_block)
+        return parsed if isinstance(parsed, dict) else {}
+    except yaml.YAMLError:
+        return {}
 
 
 def read(filepath: str, summary: bool = False) -> str:
@@ -12,14 +53,15 @@ def read(filepath: str, summary: bool = False) -> str:
     full_path = Path(BRAIN_REPO_PATH) / filepath
     if not full_path.exists():
         return f"[fichier introuvable: {filepath}]"
-    
+
     content = full_path.read_text(encoding="utf-8")
-    
+    content = _strip_frontmatter(content)
+
     if summary and len(content) > 2000:
         # Garder les 50 premières lignes comme résumé
         lines = content.split("\n")
         content = "\n".join(lines[:50]) + "\n\n[... tronqué pour le contexte]"
-    
+
     return content
 
 
