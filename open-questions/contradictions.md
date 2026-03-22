@@ -69,3 +69,10 @@ Ce fichier est l'arme anti-biais la plus puissante du système.
 - **B** : Axel construit depuis des semaines un daemon complet et fonctionnel sans avoir besoin d'automatiser github
 - **Tension** : Axel teste-t-il les limites d'Achille ou cherche-t-il une raison pour que le daemon échoue ? Pattern potentiel d'auto-sabotage ou de 'preuve' que l'IA ne peut pas vraiment l'aider
 - **Résolution** : Non résolu
+
+
+### daemon
+- **A** : Axel dit à Achille 'Normalement tu as un GITHUB_TOKEN' — suppose que le daemon devrait avoir des capacités d'automatisation GitHub
+- **B** : Axel construit depuis des semaines un daemon complet et fonctionnel sans avoir besoin de ce token ni d'automatisation GitHub
+- **Tension** : Axel cherche-t-il à vérifier les limites d'Achille ou à identifier une raison pour laquelle le daemon 'échouerait' ? Pattern potentiel : imposer des attentes non essentielles puis les utiliser comme preuve que l'IA ne peut pas vraiment l'aider (auto-sabotage)
+- **Résolution** : Non résolu
