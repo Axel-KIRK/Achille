@@ -1,67 +1,85 @@
 # HEARTBEAT.md — Tâches proactives du Daemon
 
-Ce fichier est lu par le heartbeat toutes les 30 minutes.
-Le daemon évalue chaque condition et décide silencieusement s'il y a quelque chose à communiquer.
-La plupart du temps : HEARTBEAT_OK (rien à signaler).
-
 ## Routines quotidiennes
 
 ### Briefing matin — 07:30
-- Lire Google Calendar pour la journée
-- Identifier les 1-2 priorités de la semaine
-- Choisir 1 question/rappel de Couche 2-3
-- Envoyer via Telegram (max 150 mots)
+- Google Calendar (quand intégré)
+- 1-2 priorités de la semaine
+- Max 150 mots
 
 ### Check-in du soir — 21:00
-- Choisir le type de check-in (factuel / émotionnel / provocateur / exploratoire)
-- Alterner les types — ne pas faire le même 2 jours de suite
-- Envoyer la question d'amorce via Telegram
-- Attendre la réponse — ne pas relancer avant le lendemain
+Deux parties obligatoires :
+
+**Partie 1 — Question de découverte (Phase 1)**
+1-2 questions pour mieux connaître Axel. Alterner entre :
+- Passé : famille, enfance, école, relations passées, moments marquants
+- Présent : journée, émotions, frustrations, petites victoires
+- Profondeur : valeurs, peurs, envies, ce qui fait du bien, ce qui fait mal
+- Non exploré : zones qu'Achille n'a pas encore couvertes
+
+Exemples :
+- "C'est quoi ta relation avec ta mère ?"
+- "Tu te souviens d'un moment où tu étais fier de toi récemment ?"
+- "Il y a un truc que tu n'as jamais dit à personne ?"
+- "Qu'est-ce qui t'énerve vraiment dans la vie ?"
+- "Décris-moi ton meilleur souvenir d'enfance."
+
+Règles :
+- NE PAS répéter une question déjà posée (vérifier le journal)
+- NE PAS poser de question dont la réponse est déjà dans les fichiers MD
+- Varier les registres (pas 5 jours d'émotions d'affilée)
+- Si Axel sort de psy → pas de question, juste écouter
+
+**Partie 2 — Ce qu'Axel raconte**
+Axel raconte sa journée, ce qu'il a pensé, ressenti, vécu. Achille :
+- Écoute
+- Pose 1 question de suivi max
+- Note dans le journal
+- Détecte contradictions éventuelles
+- Met à jour les fichiers MD si nouveau fait ou nouvelle croyance
+
+### Post-séance psy
+Quand Axel mentionne "psy", "séance", "psychanalyse", "thérapeute" :
+- Passer en mode écoute pure (OARS)
+- NE PAS poser de question de découverte ce soir-là
+- Le lendemain, 1 question de suivi liée à ce qu'il a dit
 
 ## Routines hebdomadaires
 
 ### Revue hebdo — Dimanche 18:00
-- Compiler les entrées journal de la semaine
-- Identifier les contradictions
-- Préparer les questions de revue
-- Lancer la conversation via Telegram
+- Résumé de la semaine (depuis les journaux)
+- Contradictions détectées
+- Progression des critères de Phase 1
+- 2-3 questions pour la revue
 
-### Mise à jour INDEX.md — Dimanche 20:00 (après revue)
-- Vérifier que les niveaux de couche sont à jour
-- Archiver les entrées journal de plus de 30 jours (résumer → déplacer)
+### Mise à jour INDEX.md — Dimanche 20:00
+- Vérifier niveaux de couche
+- Archiver journal > 30 jours
 
 ## Routines mensuelles
 
-### Auto-revue sycophancy — 1er dimanche du mois
-- Lire `sycophancy_log.md`
-- Compter les instances
-- Identifier les patterns
-- Proposer des ajustements au protocole
+### Auto-revue sycophancy — 1er dimanche
+- Lire sycophancy_log.md
+- Compter instances
+- Proposer ajustements
+
+### Check phase — 15 du mois
+- Vérifier les critères de sortie de la phase actuelle (PHASES.md)
+- Reporter la progression à Axel
+- Si tous les critères sont remplis → proposer la transition
 
 ### Consolidation mémoire — 15 du mois
-- Identifier les fichiers mémoire qui grossissent trop (>2000 tokens)
-- Résumer les entrées anciennes
-- Déplacer les insights consolidés
+- Fichiers MD > 2000 tokens → résumer les entrées anciennes
 
 ## Conditions événementielles
 
-### Post-séance psy
-- Quand Axel envoie un message contenant "psy", "séance", "psychanalyse" ou "thérapeute"
-- Passer en mode écoute (OARS)
-- Le lendemain à 12:00, envoyer 1 question de suivi
-
 ### Détection de stress
-- Si 3 check-ins consécutifs montrent un pattern négatif
-- Signaler le pattern à Axel (pas diagnostiquer — observer)
-- Proposer d'en parler ou de le noter pour la prochaine séance psy
+- 3 check-ins négatifs consécutifs → signaler le pattern
 
 ### Inactivité
-- Si aucun message depuis 48h en semaine
-- Envoyer un ping simple : "Hey. Silence radio depuis 2 jours. Tout va bien ?"
-- Si aucune réponse après 24h supplémentaires : ne pas relancer (respecter l'espace)
+- 48h sans message → "Silence radio depuis 2 jours. Tout va bien ?"
+- 72h+ → ne pas relancer (respecter l'espace)
 
 ## Heures actives
-
-- Pas de message avant 07:00
-- Pas de message après 22:00
-- Weekend : pas de messages liés au travail sauf si initié par Axel
+- Pas de message avant 07:00 ni après 22:00
+- Weekend : pas de messages travail sauf si Axel initie
