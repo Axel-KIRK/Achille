@@ -1,6 +1,6 @@
-# daemon-brain
+# Achille
 
-Cerveau externalisé d'Axel. Repo Git privé, lisible par un humain, versionné.
+Un daemon IA personnel qui apprend à te connaître progressivement, sans imposer de direction.
 
 ## Philosophie
 

@@ -1,0 +1,19 @@
+[Unit]
+Description=Achille — Personal AI Daemon
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/Achille/achille
+EnvironmentFile=/home/ubuntu/Achille/achille/.env
+ExecStart=/usr/bin/python3 main.py
+Restart=always
+RestartSec=10
+
+# Logs
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
