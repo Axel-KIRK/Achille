@@ -62,3 +62,10 @@ Ce fichier est l'arme anti-biais la plus puissante du système.
 - **B** : Passe ses weekends à aider Julie, ne dit pas quand ça lui plaît pas
 - **Tension** : Peut-être "centré sur lui-même" dans la rumination interne, mais effacé dans l'action relationnelle
 - **Non résolu**
+
+
+### boulot
+- **A** : Axel répète à Achille 'Tu peux toujours pas push sur github' comme si c'était une limitation importante
+- **B** : Axel construit depuis des semaines un daemon complet et fonctionnel sans avoir besoin d'automatiser github
+- **Tension** : Axel teste-t-il les limites d'Achille ou cherche-t-il une raison pour que le daemon échoue ? Pattern potentiel d'auto-sabotage ou de 'preuve' que l'IA ne peut pas vraiment l'aider
+- **Résolution** : Non résolu
