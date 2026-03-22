@@ -22,7 +22,7 @@ def get_client() -> OpenAI:
     """Retourne un client OpenAI pointé vers CLIProxyAPI."""
     return OpenAI(
         base_url=CLIPROXY_BASE_URL,
-        api_key="not-needed",  # CLIProxyAPI n'a pas besoin de clé
+        api_key=os.environ.get("CLIPROXY_API_KEY", "not-needed"),
     )
 
 
