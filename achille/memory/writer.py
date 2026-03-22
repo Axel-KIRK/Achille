@@ -82,3 +82,23 @@ def auto_commit(message: str = "auto: conversation update") -> bool:
     except subprocess.CalledProcessError as e:
         print(f"[git error] {e}")
         return False
+
+
+def auto_commit_targeted(message: str, files: list[str], repo_path: str = None) -> bool:
+    """Git add specific files + commit. Does NOT push."""
+    try:
+        cwd = repo_path or BRAIN_REPO_PATH
+        for f in files:
+            subprocess.run(["git", "add", f], cwd=cwd, check=True, capture_output=True)
+        result = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=cwd, capture_output=True)
+        if result.returncode == 0:
+            return False
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+        subprocess.run(
+            ["git", "commit", "-m", f"{message} ({timestamp})"],
+            cwd=cwd, check=True, capture_output=True
+        )
+        return True
+    except subprocess.CalledProcessError as e:
+        print(f"[git error] {e}")
+        return False
