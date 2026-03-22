@@ -8,6 +8,14 @@ from pathlib import Path
 from config.settings import BRAIN_REPO_PATH
 
 
+def _safe_path(filepath: str) -> Path:
+    """Resolve path and ensure it stays within BRAIN_REPO_PATH."""
+    full = (Path(BRAIN_REPO_PATH) / filepath).resolve()
+    if not full.is_relative_to(Path(BRAIN_REPO_PATH).resolve()):
+        raise ValueError(f"Path traversal blocked: {filepath}")
+    return full
+
+
 def _strip_frontmatter(text: str) -> str:
     """Supprime le bloc YAML frontmatter (délimité par ---) du texte."""
     if not text.startswith("---"):
@@ -30,7 +38,7 @@ def read_header(filepath: str = "", text: str = "") -> dict:
     Retourne un dict vide si aucun frontmatter n'est trouvé.
     """
     if filepath:
-        full_path = Path(BRAIN_REPO_PATH) / filepath
+        full_path = _safe_path(filepath)
         if not full_path.exists():
             return {}
         text = full_path.read_text(encoding="utf-8")
@@ -50,7 +58,7 @@ def read_header(filepath: str = "", text: str = "") -> dict:
 
 def read(filepath: str, summary: bool = False) -> str:
     """Lit un fichier MD depuis le brain repo."""
-    full_path = Path(BRAIN_REPO_PATH) / filepath
+    full_path = _safe_path(filepath)
     if not full_path.exists():
         return f"[fichier introuvable: {filepath}]"
 

@@ -9,16 +9,24 @@ from pathlib import Path
 from config.settings import BRAIN_REPO_PATH
 
 
+def _safe_path(filepath: str) -> Path:
+    """Resolve path and ensure it stays within BRAIN_REPO_PATH."""
+    full = (Path(BRAIN_REPO_PATH) / filepath).resolve()
+    if not full.is_relative_to(Path(BRAIN_REPO_PATH).resolve()):
+        raise ValueError(f"Path traversal blocked: {filepath}")
+    return full
+
+
 def write(filepath: str, content: str) -> None:
     """Écrit (écrase) un fichier MD."""
-    full_path = Path(BRAIN_REPO_PATH) / filepath
+    full_path = _safe_path(filepath)
     full_path.parent.mkdir(parents=True, exist_ok=True)
     full_path.write_text(content, encoding="utf-8")
 
 
 def append(filepath: str, content: str) -> None:
     """Ajoute du contenu à la fin d'un fichier MD."""
-    full_path = Path(BRAIN_REPO_PATH) / filepath
+    full_path = _safe_path(filepath)
     full_path.parent.mkdir(parents=True, exist_ok=True)
     
     existing = ""
