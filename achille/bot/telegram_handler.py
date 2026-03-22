@@ -16,6 +16,7 @@ from config.settings import TELEGRAM_BOT_TOKEN, AXEL_CHAT_ID, BRAIN_REPO_PATH
 from brain.classifier import classify
 from brain.context_assembler import build
 from brain.responder import generate
+from brain.dual_prompt import run as dual_prompt_run
 from brain.sycophancy_guard import check as sycophancy_check
 from memory.extractor import extract_and_update
 
@@ -96,24 +97,40 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # 3. Assembler le contexte
         full_context = build(classification, history)
         
-        # 4. Générer la réponse
+        # 4. Dual-prompt si conviction forte sur C2-C3
+        dual_prompt_result = None
+        if classification.get("is_strong_conviction") and classification.get("layer", 1) >= 2:
+            dual_prompt_result = await dual_prompt_run(user_message)
+        
+        # 5. Générer la réponse
+        if dual_prompt_result:
+            # Injecter la synthèse dual-prompt comme contexte additionnel
+            full_context["messages"].append({
+                "role": "user",
+                "content": f"<dual_prompt_analysis>\n{dual_prompt_result}\n</dual_prompt_analysis>\nIntègre cette analyse dans ta réponse de manière naturelle."
+            })
+            full_context["messages"].append({
+                "role": "assistant",
+                "content": "Compris, j'intègre les contre-arguments."
+            })
+        
         response = await generate(full_context, user_message)
         
-        # 5. Sycophancy check
+        # 6. Sycophancy check
         conversation_id = get_conversation_id()
         response = sycophancy_check(response, conversation_id)
         
-        # 6. Envoyer
+        # 7. Envoyer
         # Telegram limite à 4096 chars — découper si nécessaire
         for i in range(0, len(response), 4000):
             chunk = response[i:i+4000]
             await update.message.reply_text(chunk)
         
-        # 7. Sauvegarder dans l'historique
+        # 8. Sauvegarder dans l'historique
         save_message("user", user_message, classification.get("subject"), classification.get("layer"))
         save_message("assistant", response, classification.get("subject"), classification.get("layer"))
         
-        # 8. Post-traitement async
+        # 9. Post-traitement async
         asyncio.create_task(
             extract_and_update(user_message, response, classification)
         )
