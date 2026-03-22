@@ -8,19 +8,21 @@ import os
 # Ajouter le dossier achille au path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+# Charger .env
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
+
 from bot.telegram_handler import create_app
 from scheduler.cron_jobs import create_scheduler
 
 
 def check_config():
     """Vérifie que la configuration est complète."""
-    from config.settings import TELEGRAM_BOT_TOKEN, ANTHROPIC_API_KEY, AXEL_CHAT_ID, BRAIN_REPO_PATH
+    from config.settings import TELEGRAM_BOT_TOKEN, CLIPROXY_BASE_URL, AXEL_CHAT_ID, BRAIN_REPO_PATH
     
     errors = []
     if not TELEGRAM_BOT_TOKEN:
         errors.append("TELEGRAM_BOT_TOKEN manquant")
-    if not ANTHROPIC_API_KEY:
-        errors.append("ANTHROPIC_API_KEY manquant")
     if not AXEL_CHAT_ID:
         errors.append("AXEL_CHAT_ID manquant")
     if not os.path.exists(BRAIN_REPO_PATH):
@@ -35,6 +37,7 @@ def check_config():
     
     print(f"Brain repo: {BRAIN_REPO_PATH}")
     print(f"Chat ID: {AXEL_CHAT_ID}")
+    print(f"Proxy: {CLIPROXY_BASE_URL}")
 
 
 def main():

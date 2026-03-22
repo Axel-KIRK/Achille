@@ -1,13 +1,11 @@
 """
 Achille — Classifier
-Appel Haiku pour déterminer le sujet, la couche, et les fichiers à charger.
+Appel Haiku via CLIProxyAPI pour déterminer le sujet, la couche, et les fichiers à charger.
 """
 import json
-import anthropic
-from config.settings import ANTHROPIC_API_KEY, CLASSIFIER_MODEL
+from brain.api_client import chat
+from config.settings import CLASSIFIER_MODEL
 from memory.reader import read_index
-
-client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 
 CLASSIFIER_PROMPT = """Tu es le routeur de contexte d'Achille, un daemon personnel.
 Analyse le message d'Axel et retourne un JSON pour router la conversation.
@@ -51,13 +49,12 @@ async def classify(message: str) -> dict:
     )
     
     try:
-        response = client.messages.create(
+        text = chat(
+            messages=[{"role": "user", "content": prompt}],
             model=CLASSIFIER_MODEL,
             max_tokens=500,
-            messages=[{"role": "user", "content": prompt}]
         )
         
-        text = response.content[0].text.strip()
         # Nettoyer si le modèle ajoute des backticks
         if text.startswith("```"):
             text = text.split("\n", 1)[1].rsplit("```", 1)[0]

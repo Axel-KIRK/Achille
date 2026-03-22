@@ -1,6 +1,6 @@
 """
 Achille — Configuration
-Copier ce fichier en settings.py et remplir les valeurs.
+Variables d'environnement dans .env
 """
 import os
 
@@ -8,10 +8,10 @@ import os
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 AXEL_CHAT_ID = int(os.environ.get("AXEL_CHAT_ID", "0"))
 
-# Anthropic
-ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
+# CLIProxyAPI (proxy OpenAI-compatible → abo Claude Max)
+CLIPROXY_BASE_URL = os.environ.get("CLIPROXY_BASE_URL", "http://127.0.0.1:8317/v1")
 
-# OpenAI (Whisper)
+# OpenAI (Whisper) — optionnel, pour les vocaux
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 
 # GitHub
