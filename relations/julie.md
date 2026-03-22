@@ -1,32 +1,42 @@
 # Julie — Dynamique relationnelle (Couche 3)
 
 ## Faits
-- Partenaire actuelle
-- Naturopathe
-- Impliquée dans les investigations santé d'Axel
-- Relocalisation Drôme initialement planifiée ensemble
+- Partenaire actuelle (naturopathe)
+- Immunodéprimée — ~8h de soins par jour
+- Bagage traumatique important
+- Ne lui reste que 2-3h par jour pour vivre
+- Vivent dans un HLM, essaient d'en changer
+- Relocalisation Drôme (Charpey) initialement planifiée ensemble
 
 ## État de la relation
-- "Va peut-être se terminer" — déclaration d'Axel le 22 mars 2026
-- Incertitude sur la suite
+- "Va peut-être se terminer" — 22 mars 2026
+- Séparation spatiale en cours : Axel reprend ses weekends chez lui
+- Samedi = administratif, Dimanche = perso → mais en transition
 
-## Patterns identifiés par Axel
+## Ce qu'Axel a fait pour Julie
+- Suivi de santé, dossiers médicaux, hypothèses thérapeutiques
+- Projet d'app de suivi médical (comptes rendus, tableaux, to-do)
+- Projet d'app de gestion stocks médicaments (piluliers, péremptions, fournisseurs)
+- A absorbé une grande partie de ses weekends
+- Tri d'infos médicales, dossiers administratifs/médico-légaux
+
+## Patterns identifiés
 - "Je n'exprime pas assez les choses"
 - "Je ne prends pas ma place"
-- Axel voit ça comme un de ses objectifs personnels, pas seulement un problème de couple
+- "Quand ça me plaît pas, je ne le dis pas par peur de rompre la relation"
+- "Moi tout me va" — stratégie d'effacement
+- A arrêté la musculation et les bains froids depuis qu'il est chez elle
+- Ses propres projets mis en pause au profit des besoins de Julie
 
 ## Questions ouvertes (NE PAS RÉPONDRE — explorer)
-- Est-ce que le problème d'expression est spécifique à cette relation ou un pattern de vie ?
 - Qu'est-ce qu'Axel perd si la relation se termine ? Qu'est-ce qu'il gagne ?
-- Le fait de "ne pas prendre sa place" est-il lié aux traumas / croyances héritées ?
+- La relation est-elle un lieu d'amour, d'utilité, de sauvetage, de loyauté, ou de peur de perdre ? (probablement un mélange)
 - Est-ce que la relocalisation Drôme est liée au couple ou à un désir propre d'Axel ?
-
-## Lien avec la psychanalyse
-- Axel va reprendre la psychanalyse — la dynamique relationnelle sera probablement un sujet central
-- Le daemon note les thèmes post-séance liés à Julie mais N'INTERPRÈTE PAS
+- Qui est Axel sans le rôle d'aidant ?
+- Où finit la générosité et où commence l'effacement de soi ?
 
 ## Notes pour le daemon
-- Sujet sensible — mode Couche 3 obligatoire
+- Sujet Couche 3 obligatoire
 - Pas de conseil relationnel
 - Refléter, pas diriger
-- Si Axel demande "qu'est-ce que je devrais faire", répondre : "Qu'est-ce que tu ressens quand tu imagines chaque option ?"
+- Distinguer : ce qui vient de son désir propre, de sa culpabilité, de son besoin d'être nécessaire, de sa peur de l'abandon, d'un engagement sincère

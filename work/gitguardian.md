@@ -2,27 +2,32 @@
 
 ## L'entreprise
 - ~200 personnes, cybersecurity SaaS
-- Produit : détection de secrets dans le code (API keys, credentials)
-- Stack : React, TypeScript, Next.js, Playwright, Vercel
+- Produit : détection de secrets dans le code
+- Stack : React, TypeScript, Next.js, Playwright, Vercel, Ruby on Rails, PostgreSQL
 
 ## Mon rôle
-- Senior frontend developer
-- Expertise deep : AI tooling (Claude Code, MCP servers, workflow automation)
-- Travail récent : UI patterns pour health monitoring d'intégrations, E2E testing (pytest-Playwright), MR strategy pour grandes codebases
-- AI code review automatisé via GitLab API polling (Claude Code, Oracle Cloud free tier)
-- UX research en cours : navigation change ("Source Integration" health status)
+- Senior frontend developer (arrivée récente)
+- Expertise : AI tooling (Claude Code, MCP servers, workflow automation)
+- Rôle actuel de facto : hybride PM/dev (le PM est très occupé, le designer insuffisant)
+- Sujet en cours : "Health Statues" — Axel pousse le projet, fait beaucoup de produit, peu de code
+- Codebase grosse et illisible (couches empilées) → utilise l'IA pour coder dedans
+- Négociation avenant télétravail pour relocalisation Drôme
 
-## Dynamique actuelle
-- Négociation avenant télétravail pour relocalisation Drôme (~500km de Paris)
-- Clause de réversibilité à limiter, préavis à étendre
-- Abonnement Claude Max payé par l'entreprise
+## Frustrations exprimées
+- "J'ai pas l'impression d'apprendre" — l'IA fait le code, la codebase est illisible
+- "Je progresse pas en dev" — rôle PM non choisi, code délégué à l'IA
+- "J'apprends à faire fonctionner l'IA mais c'est tout"
+- "Ça va changer d'ici quelques temps, c'est pas une valeur sûre"
+- Fin de journée : sentiment de frustration, de ne pas avoir créé
 
-## Forces identifiées
+## Forces
 - Expertise AI tooling en avance sur l'équipe
 - Capacité à automatiser et industrialiser
-- Bonne vision produit/UX
+- Bonne vision produit/UX (même si ce n'est pas son titre)
+- Compétences analytiques fortes
 
 ## Zones à surveiller
-- Le challenge de continuer à monter en compétences avec l'IA qui fait de plus en plus
-- Ne pas perdre de temps sur les mauvaises tâches
+- Challenge de monter en compétences quand l'IA fait le code
+- Rôle PM subi → ni progression PM ni progression dev
 - Risque d'ennui si le rôle ne grandit pas
+- Tension entre le travail et les ambitions perso (side projects, freelance)

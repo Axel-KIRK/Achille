@@ -1,30 +1,64 @@
-# Contradictions détectées — Axel
+# Contradictions et tensions — Axel
 
-Ce fichier est l'arme anti-biais la plus puissante du système. Chaque fois qu'Axel dit quelque chose qui contredit une déclaration précédente, le Daemon le note ici. Pas pour le corriger — pour lui montrer où il est en mouvement.
+Ce fichier est l'arme anti-biais la plus puissante du système.
 
-## Format
+## Tensions structurelles (identifiées sur l'ensemble des conversations)
 
-```
-### YYYY-MM-DD — [sujet]
-- **Déclaration A** : "[citation]" (date)
-- **Déclaration B** : "[citation]" (date)
-- **Résolution** : Non résolu / Résolu le [date] — [explication]
-```
+### 1. Besoin de profondeur vs difficulté à se montrer
+- Veut du lien profond, de la compréhension, de l'authenticité
+- Mais se cache, s'efface, dit "moi tout me va"
+- **Non résolu**
 
-## Contradictions actives
+### 2. Volonté de progresser vs tendance à se dévaloriser
+- Construit Achille, apprend l'IA, veut monter en compétences
+- Mais dit "je suis pas intellectuel", "j'ai pas de culture"
+- **Non résolu**
 
-### 2026-03-22 — Rapport au travail et à la liberté
-- **A** : "J'ai beaucoup de liberté parce que je gagne pas mal d'argent" (22 mars)
-- **B** : "J'ai l'impression de pas être encore né, de ne pas savoir ce que je vais faire" (22 mars)
-- **Tension** : La liberté financière ne se traduit pas en liberté existentielle. L'argent achète des options mais pas une direction.
-- **Résolution** : Non résolu
+### 3. Goût pour la structure vs dispersion possible
+- Aime les frameworks, les systèmes, les architectures
+- Mais ne tient pas toujours ses engagements (muscu, bains froids, piano)
+- **Non résolu**
 
-### 2026-03-22 — Faire soi-même vs utiliser l'existant
-- **A** : "De base, plutôt sur le faire moi-même" (22 mars, sur le build du daemon)
-- **B** : "S'il y a des trucs qui existent déjà qui font très bien quelque chose, pourquoi pas" (même conversation)
-- **Tension** : Pattern de contrôle vs pragmatisme. Lequel domine quand il y a un vrai conflit ?
-- **Résolution** : Non résolu — à observer sur le projet daemon
+### 4. Capacité technique réelle vs sentiment de ne pas être assez
+- Senior dev, expertise AI tooling, construit un daemon complet en une session
+- Mais dit "j'apprends pas", "je suis pas assez"
+- **Non résolu**
 
-## Contradictions résolues
+### 5. Désir d'autonomie vs dépendance affective
+- Veut sa propre vie, ses propres projets, sa propre direction
+- Mais "s'oriente à travers ses meufs", s'efface dans le couple
+- **Non résolu**
 
-*(aucune pour l'instant)*
+### 6. Envie d'être lui-même vs peur que ça fasse fuir l'autre
+- Identifie clairement qu'il ne prend pas sa place
+- Mais continue de ne pas la prendre par peur de perdre le lien
+- **Non résolu**
+
+### 7. Vouloir gagner plus vs recherche de faible charge cognitive
+- Veut augmenter ses revenus, explore freelance, side projects
+- Mais veut aussi du "systématisable" avec peu de friction
+- **Tension, pas contradiction — à explorer**
+
+### 8. Curiosité réelle vs croyance qu'il s'intéresse peu profondément
+- Dit "je m'intéresse rarement aux choses en profondeur"
+- Contredit par : le microbiote, le body hacking, le projet Achille, l'archi technique
+- **La croyance est probablement fausse**
+
+### 9. Forte implication pour autrui vs difficulté à construire pour lui-même
+- Weekends absorbés par les soins à Julie, projets pour elle (app médicale, stocks médocs)
+- Ses propres projets (muscu, piano, side projects) sont abandonnés
+- **Pattern actif**
+
+## Contradictions ponctuelles
+
+### 2026-03-22 — Liberté financière vs vide existentiel
+- **A** : "J'ai beaucoup de liberté parce que je gagne pas mal d'argent"
+- **B** : "J'ai l'impression de pas être encore né, je sais pas quoi faire"
+- **Tension** : L'argent achète des options mais pas une direction
+- **Non résolu**
+
+### 2026-03-22 — "Centré sur lui-même" vs s'efface pour les autres
+- **A** : Se décrit comme "centré sur moi-même"
+- **B** : Passe ses weekends à aider Julie, ne dit pas quand ça lui plaît pas
+- **Tension** : Peut-être "centré sur lui-même" dans la rumination interne, mais effacé dans l'action relationnelle
+- **Non résolu**
