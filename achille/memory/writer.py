@@ -49,7 +49,7 @@ def auto_commit(message: str = "auto: conversation update") -> bool:
         
         # Add all changes
         subprocess.run(
-            ["git", "add", "-A"],
+            ["git", "add", "-A", "--"],
             cwd=cwd, check=True, capture_output=True
         )
         
@@ -89,7 +89,10 @@ def auto_commit_targeted(message: str, files: list[str], repo_path: str = None) 
     try:
         cwd = repo_path or BRAIN_REPO_PATH
         for f in files:
-            subprocess.run(["git", "add", f], cwd=cwd, check=True, capture_output=True)
+            subprocess.run(
+                ["git", "add", "--", f],
+                cwd=cwd, check=True, capture_output=True
+            )
         result = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=cwd, capture_output=True)
         if result.returncode == 0:
             return False
