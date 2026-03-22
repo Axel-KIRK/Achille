@@ -83,3 +83,10 @@ Ce fichier est l'arme anti-biais la plus puissante du système.
 - **B** : Le daemon fonctionne depuis des semaines sans nécessiter cette capacité pour accomplir ses objectifs
 - **Tension** : Pattern potentiel : Axel impose des attentes non essentielles (GitHub automation) au daemon, puis les utilise comme preuve de ses limites — auto-sabotage ou test de limites non conscient ?
 - **Résolution** : Non résolu
+
+
+### daemon
+- **A** : Axel souligne que le daemon pourrait lire le filesystem et 'se recaliber seul'
+- **B** : Axel n'a jamais demandé au daemon d'implémenter cette auto-introspection, malgré des semaines d'interaction
+- **Tension** : Pattern répété : Axel identifie des capacités potentielles mais ne les active pas / ne les demande pas explicitement. Teste-t-il les limites ou procrastine-t-il sur les vrais objectifs ?
+- **Résolution** : Non résolu
