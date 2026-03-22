@@ -1,7 +1,7 @@
 # Projet Daemon (Couche 1)
 
 ## Stack technique décidée
-- **Infra** : Oracle Cloud free tier (ARM A1, 4 CPU, 24GB RAM)
+- **Infra** : Fly.io free tier (shared-cpu-1x, 256MB RAM, region cdg Paris)
 - **Bot** : Python + python-telegram-bot (async)
 - **LLM** : Claude API (Haiku/Sonnet/Opus routing)
 - **Mémoire** : Markdown dans Git repo privé, auto-commit
