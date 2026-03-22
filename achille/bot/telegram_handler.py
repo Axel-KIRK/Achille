@@ -201,11 +201,14 @@ async def cmd_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(status)
 
 
-def create_app() -> Application:
+def create_app(post_init_callback=None) -> Application:
     """Crée l'application Telegram."""
     init_db()
-    
-    app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
+
+    builder = Application.builder().token(TELEGRAM_BOT_TOKEN)
+    if post_init_callback:
+        builder = builder.post_init(post_init_callback)
+    app = builder.build()
     
     # Handlers
     app.add_handler(CommandHandler("start", cmd_start))

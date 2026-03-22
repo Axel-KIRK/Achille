@@ -19,7 +19,7 @@ from scheduler.cron_jobs import create_scheduler
 def check_config():
     """Vérifie que la configuration est complète."""
     from config.settings import TELEGRAM_BOT_TOKEN, CLIPROXY_BASE_URL, AXEL_CHAT_ID, BRAIN_REPO_PATH
-    
+
     errors = []
     if not TELEGRAM_BOT_TOKEN:
         errors.append("TELEGRAM_BOT_TOKEN manquant")
@@ -29,33 +29,36 @@ def check_config():
         errors.append(f"Brain repo introuvable: {BRAIN_REPO_PATH}")
     elif not os.path.exists(os.path.join(BRAIN_REPO_PATH, "INDEX.md")):
         errors.append(f"INDEX.md manquant dans {BRAIN_REPO_PATH}")
-    
+
     if errors:
         for e in errors:
             print(f"ERREUR: {e}")
         sys.exit(1)
-    
+
     print(f"Brain repo: {BRAIN_REPO_PATH}")
     print(f"Chat ID: {AXEL_CHAT_ID}")
     print(f"Proxy: {CLIPROXY_BASE_URL}")
 
 
-def main():
-    print("Achille démarrage...")
-    check_config()
-    
-    # Scheduler (briefing matin, check-in soir, revue hebdo, inactivité)
+async def post_init(application):
+    """Callback exécuté après le démarrage du bot, dans l'event loop."""
     scheduler = create_scheduler()
     scheduler.start()
-    
+
     jobs = scheduler.get_jobs()
     print(f"Scheduler: {len(jobs)} tâches programmées")
     for job in jobs:
         print(f"  - {job.name} → {job.trigger}")
-    
-    # Bot Telegram (polling bloquant — le scheduler tourne en arrière-plan)
+
     print("Achille en ligne.")
-    app = create_app()
+
+
+def main():
+    print("Achille démarrage...")
+    check_config()
+
+    # Bot Telegram avec scheduler démarré dans post_init (dans l'event loop)
+    app = create_app(post_init_callback=post_init)
     app.run_polling(drop_pending_updates=True)
 
 
