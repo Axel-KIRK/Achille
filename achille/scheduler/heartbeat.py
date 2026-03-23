@@ -9,7 +9,7 @@ from zoneinfo import ZoneInfo
 from brain.responder import generate_with_model
 from brain.context_assembler import build
 from memory.reader import read, read_index
-from bot.sender import send_sync
+from bot.sender import send
 from config.settings import (
     MODELS, TIMEZONE,
     MORNING_BRIEFING_HOUR, MORNING_BRIEFING_MINUTE,
@@ -82,7 +82,7 @@ Date : {datetime.now(tz).strftime('%A %d %B %Y')}
     
     response = await generate_with_model(prompt, MODELS[1])  # Haiku
     if response:
-        send_sync(response)
+        await send(response)
 
 
 async def evening_checkin():
@@ -128,7 +128,7 @@ Expériences actives : {experiments}
     
     response = await generate_with_model(prompt, MODELS[1])  # Haiku
     if response:
-        send_sync(response)
+        await send(response)
 
 
 async def weekly_review():
@@ -168,7 +168,7 @@ Croyances : {beliefs}
     
     response = await generate_with_model(prompt, MODELS[2])  # Sonnet pour la revue
     if response:
-        send_sync(response)
+        await send(response)
 
 
 async def inactivity_check():
@@ -195,5 +195,5 @@ async def inactivity_check():
     hours_since = (datetime.now() - last_time).total_seconds() / 3600
     
     if 48 <= hours_since < 72:
-        send_sync("Silence radio depuis 2 jours. Tout va bien ?")
+        await send("Silence radio depuis 2 jours. Tout va bien ?")
     # Après 72h : ne pas relancer (respecter l'espace)
