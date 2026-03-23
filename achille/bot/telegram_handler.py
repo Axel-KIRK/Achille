@@ -14,6 +14,7 @@ from telegram.ext import (
 )
 
 from config.settings import TELEGRAM_BOT_TOKEN, AXEL_CHAT_ID, BRAIN_REPO_PATH
+from bot.notify import notify_error
 from brain.classifier import classify
 from brain.context_assembler import build
 from brain.responder import generate
@@ -113,6 +114,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE, ove
                         auto_commit_targeted("consolidation: belief updated", [target])
             except Exception as e:
                 print(f"[confirmation error] {e}")
+                await notify_error("confirmation", e)
             await update.message.reply_text("Fait.")
         else:
             await update.message.reply_text("OK, je laisse.")
@@ -172,6 +174,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE, ove
     
     except Exception as e:
         print(f"[handle_message error] {e}")
+        await notify_error("handle_message", e)
         await update.message.reply_text(f"Erreur interne. ({type(e).__name__})")
 
 
@@ -199,6 +202,7 @@ async def handle_voice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     except Exception as e:
         print(f"[handle_voice error] {e}")
+        await notify_error("handle_voice", e)
         await update.message.reply_text("Erreur lors de la transcription.")
 
 

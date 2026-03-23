@@ -19,6 +19,7 @@ from glob import glob
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+from bot.notify import notify_error
 from bot.sender import send
 from brain.responder import generate_with_model
 from config.settings import (
@@ -602,6 +603,7 @@ async def run_daily_consolidation() -> dict:
             report["steps"][name] = {"status": "error", "error": str(e)}
             report["errors"].append(f"{name}: {e}")
             print(f"[consolidator] {name} failed: {e}")
+            await notify_error(f"consolidation.{name}", e)
 
     report["finished_at"] = datetime.now(tz).isoformat()
 

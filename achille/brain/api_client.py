@@ -8,6 +8,7 @@ On utilise le SDK openai pointé vers ce proxy.
 """
 import os
 from openai import OpenAI
+from bot.notify import notify_error_sync
 from config.settings import CLIPROXY_BASE_URL
 
 # Mapping des noms de modèles Anthropic → ce que CLIProxyAPI comprend
@@ -59,6 +60,7 @@ def chat(
     
     except Exception as e:
         print(f"[api_client error] {e}")
+        notify_error_sync("api_client", e)
         return f"[Erreur API: {e}]"
 
 

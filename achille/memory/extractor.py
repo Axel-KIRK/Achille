@@ -4,6 +4,7 @@ Post-conversation : extrait faits, contradictions, et journal entry.
 Tourne en async après l'envoi de la réponse.
 """
 import json
+from bot.notify import notify_error
 from brain.responder import generate_with_model
 from memory.reader import read
 from memory.writer import append, append_journal_entry, auto_commit
@@ -105,6 +106,7 @@ async def extract_and_update(user_message: str, response: str, classification: d
     
     except (json.JSONDecodeError, Exception) as e:
         print(f"[extractor error] {e}")
+        await notify_error("extractor", e, verbose=False)
         # Log minimal même en cas d'erreur
         append_journal_entry(f"Conversation sur {classification.get('subject', '?')} (extraction échouée)")
         auto_commit("extract: error fallback")
