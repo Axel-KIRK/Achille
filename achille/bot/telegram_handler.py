@@ -75,15 +75,15 @@ def get_recent_messages(limit: int = 10) -> list[dict]:
     return messages
 
 
-async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE, override_text: str = None):
     """Handler principal pour les messages texte."""
-    
+
     # Sécurité : seul Axel peut parler au daemon
     if update.effective_chat.id != AXEL_CHAT_ID:
         await update.message.reply_text("Ce daemon est privé.")
         return
-    
-    user_message = update.message.text
+
+    user_message = override_text or update.message.text
     if not user_message:
         return
 
@@ -193,9 +193,7 @@ async def handle_voice(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text = await transcribe(voice_path)
         
         if text:
-            # Simuler un message texte
-            update.message.text = text
-            await handle_message(update, context)
+            await handle_message(update, context, override_text=text)
         else:
             await update.message.reply_text("Transcription échouée. Réessaie.")
     
